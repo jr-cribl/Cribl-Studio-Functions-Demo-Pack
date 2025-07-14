@@ -1,1 +1,1 @@
-{"version":"0.0.1","tags":{"streamtags":["demo"],"dataType":["metrics"]},"exports":[],"displayName":"Cribl Studio - Functions: Fold Keys","minLogStreamVersion":"4.11.0","author":"JR","description":"A pack that demonstrates the Fold Keys function","name":"Cribl_Studio_-_Functions_Fold_Keys"}
+{"version":"0.0.1","tags":{"streamtags":["demo"],"dataType":["metrics"]},"exports":[],"displayName":"Cribl Studio Demo Pack - Functions","minLogStreamVersion":"4.13.0","author":"JR","description":"A pack that demonstrates the Fold Keys function","name":"Cribl_Studio_Functions_DemoPack"}
