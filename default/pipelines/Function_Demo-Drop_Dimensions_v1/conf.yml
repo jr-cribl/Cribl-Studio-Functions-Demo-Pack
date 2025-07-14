@@ -1,0 +1,62 @@
+output: default
+streamtags: []
+groups: {}
+asyncFuncTimeout: 1000
+functions:
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: >-
+        Use Sample: EdgeCap_Internal_LinuxSystemMetrics_2507
+
+        Note: Drop Dimensions only work with events that have a __criblMetrics field
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: Next, we will drop events to simplify our display. We only care about
+        the events that include node_cpu_count
+  - id: drop
+    filter: __criblMetrics==null ||  node_cpu_count==null
+    disabled: false
+    conf: {}
+    final: true
+    description: "We drop irrelevant events (see comment for details) "
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: >-
+        If you enable drop dimensions, you will see that we removed dimensions
+        for which we do not care - such as nodename (redundant) release (we can
+        enrich with Search later) sysname (redundant) and version (we can enrich
+        with Search later - it doesn't need to be in every event). 
+
+
+        you will also notice that the original events have been dropped and replacec by metrics, aggregated every 20 seconds, by the remaining dimension (host). 
+
+
+        Finally, you will see that each metric has been split into it's own event (node_uname_info and node_cpu_count were originally a part of the same metric event)
+  - id: drop_dimensions
+    filter: node_cpu_count!=null
+    disabled: false
+    conf:
+      timeWindow: 20s
+      dropDimensions:
+        - release
+        - version
+        - sysname
+        - nodename
+      flushOnInputClose: true
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: Now that we have isolated metrics, let's remove unused metrics such as
+        node_uname_info
+  - id: drop
+    filter: node_uname_info!=null
+    disabled: null
+    conf: {}
+description: ""

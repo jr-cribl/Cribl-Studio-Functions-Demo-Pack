@@ -1,0 +1,64 @@
+output: default
+streamtags: []
+groups: {}
+asyncFuncTimeout: 1000
+functions:
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: >-
+        We drop metrics, if sourcetype does not equal
+        "linux-system-metrics-edge", to clean up samples. 
+
+
+        Notes of production use of this pipeline: 
+
+
+        If you CANNOT lose ANY events in production then you can try the following in lieu of using a Drop function
+
+
+        1) Add the filter from the drop function to all functions in the pipeline so that events are not modified in unintended ways. The cribl_pipe field should include this pipeline (unless removed by admins) 
+
+
+        2) use an eval function, with this filter, to add a field named "misroute" and a value of "sourcetype doesn't match expected value". This should allow you to ID the misrouted fields later on. 
+  - id: drop
+    filter: __criblMetrics==null
+    disabled: false
+    conf: {}
+    final: true
+    description: "We drop irrelevant events (see comment for details) "
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: 'Now, we will rename fields in this event so that, if they start with
+        "node_" we prepend "metrics." to the name. If you want a rename
+        expression, try asking copilot. Example: "write a js express, to be used
+        with the rename function, that finds any field starting with "node_" and
+        prepends "metrics." in front of it"'
+  - id: rename
+    filter: "true"
+    disabled: null
+    conf:
+      wildcardDepth: 5
+      rename: []
+      renameExpr: "name.startsWith('node_') ? `metrics.${name}` : name"
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: Now that our metrics are all prepended with "metrics." we can fold them
+  - id: foldkeys
+    filter: "true"
+    disabled: null
+    conf:
+      deleteOriginal: true
+      separator: .
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: 'Now we will tag metadata and fold those fields into a parent field
+        named "metadata". '
+description: ""
