@@ -7,9 +7,20 @@ functions:
     filter: "true"
     disabled: null
     conf:
+      comment: DO NOT MODIFY THIS  PACK - COPY FROM
+        https://github.com/jr-cribl/Cribl-Studio-Functions-Demo-Pack#
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: "Use Sample: EdgeCap_Internal_LinuxSystemMetrics_2507"
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
       comment: >-
-        We drop metrics, if sourcetype does not equal
-        "linux-system-metrics-edge", to clean up samples. 
+        We drop metrics, if the __criblMetrics field does not exist, to clean up
+        samples. 
 
 
         Notes of production use of this pipeline: 
@@ -61,4 +72,10 @@ functions:
     conf:
       comment: 'Now we will tag metadata and fold those fields into a parent field
         named "metadata". '
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: DO NOT MODIFY THIS  PACK - COPY FROM
+        https://github.com/jr-cribl/Cribl-Studio-Functions-Demo-Pack#
 description: ""

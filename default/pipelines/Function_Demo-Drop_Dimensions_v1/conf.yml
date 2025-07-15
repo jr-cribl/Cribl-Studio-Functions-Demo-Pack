@@ -7,6 +7,12 @@ functions:
     filter: "true"
     disabled: null
     conf:
+      comment: DO NOT MODIFY THIS  PACK - COPY FROM
+        https://github.com/jr-cribl/Cribl-Studio-Functions-Demo-Pack#
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
       comment: >-
         Use Sample: EdgeCap_Internal_LinuxSystemMetrics_2507
 
@@ -59,4 +65,10 @@ functions:
     filter: node_uname_info!=null
     disabled: null
     conf: {}
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: DO NOT MODIFY THIS  PACK - COPY FROM
+        https://github.com/jr-cribl/Cribl-Studio-Functions-Demo-Pack#
 description: ""
